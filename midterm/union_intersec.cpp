@@ -16,13 +16,27 @@ int main(){
 		Intersec[b[i]] += 1;
 	}
 	
-	for(int i = 0; i < n; i++){
+	//intersec
+	for (int i = 0; i < n; i++){
 		if(Intersec[a[i]] == 2){
 			cout << a[i] << " ";
 		}
 	}
 	
+	cout << endl;
 	
-	
+	//union
+	for (int i = 0; i < n; i++){
+		if(Union[a[i]] == 0){
+			cout << a[i] << " ";
+			Union[a[i]] = 1;
+		}
+	}
+	for (int i = 0; i < n; i++){
+		if(Union[b[i]] == 0){
+			cout << b[i] << " ";
+			Union[b[i]] = 1;
+		}
+	}
 	return 0;
 }

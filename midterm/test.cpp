@@ -1,33 +1,51 @@
-#include<stdio.h>
+#include<iostream>
+#include<algorithm>
+#include<vector>
+using namespace std;
 
-void swap(int *a, int *b){
-	int temp = *a;
-	*a = *b;
-	*b = temp;
-}
-
-void permute(int x[], int start, int end){
-	if(start == end){
-		if(x[2] == 1){
-			for (int  i  = 1; i <= end; i++){
-				printf("%d ", x[i]);
-			}
-			printf("\n");	
-		}
-		return;
-	}
-	
-	for (int  i = start; i <= end; i++){
-		swap(&x[start], &x[i]);
-		permute(x, start + 1, end);
-		swap(&x[start], &x[i]);
-	}
-}
+vector<int> Intersec(100);
 
 int main(){
-	int n = 3;
-	int x[] = {-1,1,2,3}; // 1=boy, 2=g1, 3=g2, -1 = no use
+	int n;
+	cin >> n;
+	vector<int> a(n);
+	vector<int> b(n);
+	for (int i = 0; i < n; i++){
+		cin >> a[i];
+	}
+	for (int i = 0; i < n; i++){
+		cin >> b[i];
+	}
+	sort(a.begin(), a.end());
+	sort(b.begin(), b.end());
 	
-	permute(x, 1, n);
+	//Intersec
+	for (int i = 0; i < n; i++){
+		Intersec[a[i]] += 1;
+		Intersec[b[i]] += 1;
+	}
+	for (int i = 0; i < n; i++){
+		if(Intersec[a[i]] == 2){
+			cout << a[i] << " ";
+		}
+	}
+	cout << endl;
+	
+	
+	//Union
+	vector<int> Union(n + n);
+	for (int i = 0; i < n; i++){
+		Union[i] = a[i]; 
+	}
+	for (int i = 0; i < n; i++){
+		Union[n + i] = b[i];
+	}
+	sort(Union.begin(), Union.end());
+	cout << Union[0] << " ";
+	for (int i= 1; i < n+n; i++){
+		if(Union[i] != Union[i - 1]){
+			cout << Union[i] << " ";
+		}
+	}
 	return 0;
 }
