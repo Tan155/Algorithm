@@ -8,24 +8,24 @@ void swap(int *a, int *b){
 
 void permute(int x[], int start, int end){
 	if(start == end){
-		for (int  i  = 1; i <= end; i++){
+		for (int i = 1; i <= end; i++){
 			printf("%d", x[i]);
 		}
 		printf("\n");
 		return;
 	}
 	
-	for (int  i = start; i <= end; i++){
+	for (int i = start; i <= end; i++){
 		swap(&x[start], &x[i]);
-		permute(x, start + 1, end);
+		permute(x, start+1, end);
 		swap(&x[start], &x[i]);
 	}
 }
 
 int main(){
 	int n = 3;
-	int x[] = {-1,1,2,3}; // 1=boy, 2=g1, 3=g2, -1 = no use
-		
-	permute(x, 1, n);
+	int x[] = {-1, 1, 2, 3};
+	
+	permute(x,1,n);
 	return 0;
 }
