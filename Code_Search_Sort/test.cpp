@@ -1,42 +1,45 @@
 #include<iostream>
 using namespace std;
 
-void swap(int *a,int *b){
+int count = 0;
+
+void swap(int *a, int *b){
 	int temp = *a;
 	*a = *b;
 	*b = temp;
 }
 
-int partition(int arr[],int l,int r){
-	int i = l - 1, j = r, pivot = arr[r];
-	while(true){
-		do{
-			i++;
-		}while(arr[i] < pivot);
-		do{
-			j--;
-		}while(arr[j] > pivot);
-		if(i > j)break;
-		swap(&arr[i], &arr[j]); 
+void printSol(int x[],int n){
+	for (int i = 1; i <= n; i++){
+		cout << x[i] << " ";
 	}
-	swap(&arr[i],&arr[r]);
-	return i;
+	cout << endl;
 }
 
-void quickSort(int arr[],int l,int r){
-	if(l < r){
-		int p = partition(arr,l,r);
-		quickSort(arr,l,p-1);
-		quickSort(arr,p+1,r);	
+void subset1(int x[], int start, int end){
+	if (start == end){
+		int i = 0;
+		while(x[i] != 1)i++;
+		if((x[i-1] == 2 || x[i + 1] == 2)) count++; return;
+//		printSol(x,start); return;	
+	}
+	for (int i = start; i <= end; i++){
+		swap(&x[start], &x[i]);
+		subset1(x, start + 1, end);
+		swap(&x[start], &x[i]);
 	}
 }
+
+
 
 int main(){
-	int arr[] = {4,31,36,14,62,91,8,22,7,81};
-	int n = sizeof(arr) / sizeof(int);
-	quickSort(arr, 0, n-1);
-	for (int i = 0; i < n; i++){
-		cout << arr[i] << " ";
+	int n;
+	cin >> n;
+	int x[n] = {0};
+	for (int i = 1; i <= n; i++){
+		x[i] = i;
 	}
+	subset1(x, 1, n);
+	cout << count;
 	return 0;
 }

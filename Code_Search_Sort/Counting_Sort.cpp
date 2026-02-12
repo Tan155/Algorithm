@@ -6,7 +6,7 @@ int main(){
 	int n = sizeof(arr) / sizeof(int);
 	
 	int count[100] = {0};
-	for (int i = 0; i < n; i++){
+	for (int i=0;i < n; i++){
 		count[arr[i]]++;
 	}
 	
