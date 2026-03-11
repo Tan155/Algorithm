@@ -46,3 +46,15 @@ int main() {
 
     return 0;
 }
+
+
+/*
+3
+A B C
+
+4
+E X A B
+
+
+
+*/
