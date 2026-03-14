@@ -1,48 +1,32 @@
-#include <iostream>
-#include <vector>
-
+#include<iostream>
+#include<vector>
 using namespace std;
+vector<int> bright(100);
+int n, k, ans = 0;
 
-int totalCount = 0;
-
-
-void subset1(vector<int> &arr, vector<int> &x, int l, int n, int sum, int k, int lampCount) {
-
-    if (sum == k) {
-        if (lampCount >= 2) {
-            totalCount++;
-        }
-        return;
-    }
-
-
-    if (l >= n || sum > k) {
-        return;
-    }
-
-
-    if (l == 0 || x[l - 1] == 0) {
-        x[l] = 1;
-    	subset1(arr, x, l + 1, n, sum + arr[l], k, lampCount + 1);
-    	x[l] = 0;
-    }
-    
-    subset1(arr, x, l + 1, n, sum, k, lampCount);
+void check(int l, int count, int sum, bool prev){
+	if(sum == k){
+		if(count >= 2)ans++;
+		return;
+	}
+	if(l == n || sum > k) return;
+	
+	if(!prev){
+		check(l+1, count+1,sum + bright[l], true);
+	}
+	check(l+1, count, sum, false);
 }
 
-int main() {
-    int n, k;
-    if (!(cin >> n >> k)) return 0;
-
-    vector<int> arr(n);
-    vector<int> x(n, 0); 
-
-    for (int i = 0; i < n; i++) {
-        cin >> arr[i];
-    }
-
-    subset1(arr, x, 0, n, 0, k, 0);
-
-    cout << totalCount << endl;
-    return 0;
+int main(){
+	cin >> n >> k;
+	for (int i = 0; i < n; i++)cin >> bright[i];
+	check(0, 0, 0, false);
+	cout << ans;
+	return 0;
 }
+
+/*
+4 5
+1 2 3 4
+
+*/

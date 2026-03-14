@@ -46,5 +46,5 @@ int main(){
 	}
 		
 	permute(x, 0, n);
-	return 0;
 }
+ 
